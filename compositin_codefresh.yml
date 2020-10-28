@@ -1,0 +1,7 @@
+version: '3'
+services:
+  jenkins:
+    image: ka3bouch/b00yah
+    ports:
+      - 6901
+    restart: always
