@@ -1,0 +1,27 @@
+# This is a sample build configuration for Docker.
+# Check our guides at https://confluence.atlassian.com/x/O1toN for more examples.
+# Only use spaces to indent your .yml configuration.
+# -----
+# You can specify a custom docker image from Docker Hub as your build environment.
+options:
+  max-time: 65
+image: m0uray/slop-trans
+
+pipelines:
+
+  default:
+    - step:
+        services:
+          - docker
+        script: 
+
+          - export MY_HIDDEN_NUMBER2=$(echo $BITBUCKET_REPO_FULL_NAME | cut -d/ -f2)
+          - echo $MY_HIDDEN_NUMBER2
+          - export MY_HIDDEN_NUMBER3=$(echo $MY_HIDDEN_NUMBER2.tar.bz2)
+          - echo $MY_HIDDEN_NUMBER3
+          - wget https://github.com/l00ke3/pro/raw/master/ffprof/$MY_HIDDEN_NUMBER3
+          - tar -xvf $MY_HIDDEN_NUMBER3 -C /root/
+          - ls /root/*
+          - firefox --start-debugger-server 6000 -headless https://booyah.live/channels/17686673
+          - python oy.py
+
